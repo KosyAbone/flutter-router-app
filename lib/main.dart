@@ -1,33 +1,67 @@
 import 'package:flutter/material.dart';
-
-import 'package:flutter_assignment/pages/calculator_page.dart';
-import 'package:flutter_assignment/pages/api_page.dart';
-import 'package:flutter_assignment/pages/notes_page.dart';
-import 'package:flutter_assignment/pages/greeting_page.dart';
-import 'package:flutter_assignment/pages/home_page.dart';
+import 'package:go_router/go_router.dart';
+import '/router.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My Flutter App',
-      theme: ThemeData(
-        primaryColor: Colors.blue,
+    return MaterialApp.router(
+      routerDelegate: router.routerDelegate,
+      routeInformationParser: router.routeInformationParser,
+      routeInformationProvider: router.routeInformationProvider
+    );
+  }
+}
+
+
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Welcome')),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.4, // Adjust as needed
+            child: Center(
+              child: Image.asset(
+                'assets/images/welcome_image.jpeg',
+                width: MediaQuery.of(context).size.width * 0.6, // Adjust as needed
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () => context.go('/weather'),
+                  child: const Text('Weather Search'),
+                ),
+                ElevatedButton(
+                  onPressed: () => context.go('/map'),
+                  child: const Text('Map'),
+                ),
+                ElevatedButton(
+                  onPressed: () => context.go('/wordcounter'),
+                  child: const Text('Word Counter'),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
-      initialRoute: '/home',
-      routes: {
-        '/': (context) => const GreetingPage(),
-        '/home': (context) => const HomePage(),
-        '/calculator': (context) => const CalculatorPage(),
-        '/api': (context) => const APIPage(),
-        '/notes': (context) => const NotesPage(),
-      },
     );
   }
 }
