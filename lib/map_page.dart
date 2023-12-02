@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapPage extends StatefulWidget {
+class MapPage extends StatelessWidget {
   const MapPage({Key? key}) : super(key: key);
-
-  @override
-  _MapPageState createState() => _MapPageState();
-}
-
-class _MapPageState extends State<MapPage> {
-  late GoogleMapController mapController;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +14,9 @@ class _MapPageState extends State<MapPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Center(
-                child: Text('Map Page'),
+                child: Text('Map Page Content Goes Here', style: TextStyle(fontSize: 24)),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 100),
               Positioned(
               bottom: 20.0,
               right: 20.0,

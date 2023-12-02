@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import '/router.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,11 +14,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerDelegate: router.routerDelegate,
       routeInformationParser: router.routeInformationParser,
-      routeInformationProvider: router.routeInformationProvider
+      routeInformationProvider: router.routeInformationProvider,
+      theme: ThemeData.light().copyWith(
+      appBarTheme:const AppBarTheme(
+        backgroundColor: Color.fromARGB(255, 233, 126, 44),
+      ))
     );
   }
 }
-
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -26,33 +29,36 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Welcome')),
+      appBar: AppBar(title: const Text('Flutter Assignment App')),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.4, // Adjust as needed
+          Expanded(
+            flex: 2,
             child: Center(
               child: Image.asset(
                 'assets/images/welcome_image.jpeg',
-                width: MediaQuery.of(context).size.width * 0.6, // Adjust as needed
+                height: MediaQuery.of(context).size.height * 0.6, // Adjust image size
+                width: MediaQuery.of(context).size.width * 0.8,
                 fit: BoxFit.contain,
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Expanded(
+            flex: 1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ElevatedButton(
                   onPressed: () => context.go('/weather'),
-                  child: const Text('Weather Search'),
+                  child: const Text('Weather'),
                 ),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () => context.go('/map'),
                   child: const Text('Map'),
                 ),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () => context.go('/wordcounter'),
                   child: const Text('Word Counter'),
