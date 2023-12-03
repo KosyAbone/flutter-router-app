@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
-
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({Key? key}) : super(key: key);
@@ -12,22 +13,24 @@ class WeatherPage extends StatefulWidget {
 
 class _WeatherPageState extends State<WeatherPage> {
   final TextEditingController _cityController = TextEditingController();
-  String _weatherInfo = '';
+  Map<String, dynamic> _weatherInfo = {};
 
   Future<void> _getWeather(String city) async {
     // Replace 'YOUR_API_KEY' with the actual API key
-    const apiKey = 'YOUR_API_KEY';
-    final apiUrl = 'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$apiKey';
-    
+    const apiKey = '10ec237e4e034eda983202746231610';
+    final apiUrl =
+        'https://api.weatherapi.com/v1/current.json?key=$apiKey&q=$city';
+
     final response = await http.get(Uri.parse(apiUrl));
-    
+
     if (response.statusCode == 200) {
       setState(() {
-        _weatherInfo = response.body; // Handle and format the response as needed
+        _weatherInfo = json
+            .decode(response.body); // Handle and format the response as needed
       });
     } else {
       setState(() {
-        _weatherInfo = 'Failed to fetch weather data';
+        _weatherInfo = {'error': 'Failed to fetch weather data'};
       });
     }
   }
@@ -57,17 +60,37 @@ class _WeatherPageState extends State<WeatherPage> {
               child: const Text('Search'),
             ),
             const SizedBox(height: 20),
-            Text(_weatherInfo),
+            // Text(_weatherInfo),
+            if (_weatherInfo.containsKey('error'))
+              Text(_weatherInfo['error'])
+            else
+              Column(
+                children: [
+                  if (_weatherInfo != null &&
+                      _weatherInfo.containsKey('current'))
+                    Text('Temperature: ${_weatherInfo['current']['temp_c']}°C'),
+                  if (_weatherInfo != null &&
+                      _weatherInfo.containsKey('current') &&
+                      _weatherInfo['current'].containsKey('condition'))
+                    Text(
+                        'Weather: ${_weatherInfo['current']['condition']['text']}'),
+                  if (_weatherInfo != null &&
+                      _weatherInfo.containsKey('current') &&
+                      _weatherInfo['current'].containsKey('humidity'))
+                    Text('Humidity: ${_weatherInfo['current']['humidity']}%'),
+                ],
+              ),
+            const SizedBox(height: 20),
             Positioned(
-            bottom: 20.0,
-            right: 20.0,
-            child: FloatingActionButton(
-              onPressed: () {
-                context.go('/');
-              },
-              child: const Icon(Icons.home),
+              bottom: 20.0,
+              right: 20.0,
+              child: FloatingActionButton(
+                onPressed: () {
+                  context.go('/');
+                },
+                child: const Icon(Icons.home),
+              ),
             ),
-          ),
           ],
         ),
       ),

@@ -12,14 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerDelegate: router.routerDelegate,
-      routeInformationParser: router.routeInformationParser,
-      routeInformationProvider: router.routeInformationProvider,
-      theme: ThemeData.light().copyWith(
-      appBarTheme:const AppBarTheme(
-        backgroundColor: Color.fromARGB(255, 233, 126, 44),
-      ))
-    );
+        routerDelegate: router.routerDelegate,
+        routeInformationParser: router.routeInformationParser,
+        routeInformationProvider: router.routeInformationProvider,
+        theme: ThemeData.light().copyWith(
+            appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 233, 126, 44),
+        )));
   }
 }
 
@@ -38,7 +37,8 @@ class WelcomePage extends StatelessWidget {
             child: Center(
               child: Image.asset(
                 'assets/images/welcome_image.jpeg',
-                height: MediaQuery.of(context).size.height * 0.6, // Adjust image size
+                height: MediaQuery.of(context).size.height *
+                    0.6, // Adjust image size
                 width: MediaQuery.of(context).size.width * 0.8,
                 fit: BoxFit.contain,
               ),
@@ -55,8 +55,8 @@ class WelcomePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () => context.go('/map'),
-                  child: const Text('Map'),
+                  onPressed: () => context.go('/newsfeed'),
+                  child: const Text('NewsFeed'),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
