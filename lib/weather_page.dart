@@ -26,7 +26,7 @@ class _WeatherPageState extends State<WeatherPage> {
     if (response.statusCode == 200) {
       setState(() {
         _weatherInfo = json
-            .decode(response.body); // Handle and format the response as needed
+            .decode(response.body); // Convert the JSON data to a Map<String, dynamic>
       });
     } else {
       setState(() {

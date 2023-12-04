@@ -26,6 +26,10 @@ class _WordCounterPageState extends State<WordCounterPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Text('Enter any word and see the word count below!',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.purple),
+            ),
+            const SizedBox(height: 50),
             TextField(
               onChanged: _updateWordCount,
               decoration: const InputDecoration(

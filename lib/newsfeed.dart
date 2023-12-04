@@ -102,22 +102,28 @@ class _NewsFeedState extends State<NewsFeed> {
                   itemCount: newsData['articles']?.length ?? 0,
                   itemBuilder: (context, index) {
                     final article = newsData['articles'][index];
-                    return Card(
-                      child: Column(
-                        children: [
-                          Text(
-                            article['title'] ?? '',
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                          Text(article['description'] ?? ''),
-                          TextButton(
-                            onPressed: () {
-                              // ignore: deprecated_member_use
-                              launch(Uri.parse(article['url']).toString());// Open the article URL in a browser
-                            },
-                            child: const Text('Read More'),
-                          ),
-                        ],
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        child: Column(
+                          children: [
+                            Text(
+                              article['title'] ?? '',
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Text(article['description'] ?? '',
+                                style: const TextStyle(fontSize: 16)),
+                            TextButton(
+                              onPressed: () {
+                                // ignore: deprecated_member_use
+                                launch(Uri.parse(article['url'])
+                                    .toString()); // Open the article URL in a browser
+                              },
+                              child: const Text('Read More'),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },

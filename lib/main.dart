@@ -50,11 +50,6 @@ class WelcomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ElevatedButton(
-                  onPressed: () => context.go('/weather'),
-                  child: const Text('Weather'),
-                ),
-                const SizedBox(height: 20),
-                ElevatedButton(
                   onPressed: () => context.go('/newsfeed'),
                   child: const Text('NewsFeed'),
                 ),
@@ -62,6 +57,11 @@ class WelcomePage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () => context.go('/wordcounter'),
                   child: const Text('Word Counter'),
+                ),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () => context.go('/weather'),
+                  child: const Text('Weather'),
                 ),
               ],
             ),
