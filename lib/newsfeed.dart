@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -81,18 +82,18 @@ class _NewsFeedState extends State<NewsFeed> {
                   topic = value;
                 });
               },
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Search News',
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             ElevatedButton(
               onPressed: searchNews,
-              child: Text('Search'),
+              child: const Text('Search'),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             if (loading)
-              Text('Loading...')
+              const Text('Loading...')
             else if (error != null)
               Text('Error: $error')
             else
@@ -106,14 +107,15 @@ class _NewsFeedState extends State<NewsFeed> {
                         children: [
                           Text(
                             article['title'] ?? '',
-                            style: TextStyle(fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                           ),
                           Text(article['description'] ?? ''),
                           TextButton(
                             onPressed: () {
-                              // Open the article URL in a browser
+                              // ignore: deprecated_member_use
+                              launch(Uri.parse(article['url']).toString());// Open the article URL in a browser
                             },
-                            child: Text('Read More'),
+                            child: const Text('Read More'),
                           ),
                         ],
                       ),
