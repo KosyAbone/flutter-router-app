@@ -1,8 +1,8 @@
 import 'package:go_router/go_router.dart';
 import '/main.dart';
-import '/weather_page.dart';
-import 'newsfeed.dart';
-import '/word_counter.dart';
+import 'weatherPage.dart';
+import 'newsFeed.dart';
+import 'wordCounter.dart';
 
 final GoRouter router = GoRouter(
   routes: <GoRoute>[
@@ -15,11 +15,11 @@ final GoRouter router = GoRouter(
             builder: (context, state) => const WeatherPage(),
           ),
           GoRoute(
-            path: 'newsfeed',
+            path: 'newsFeed',
             builder: (context, state) => const NewsFeed(),
           ),
           GoRoute(
-            path: 'wordcounter',
+            path: 'wordCounter',
             builder: (context, state) => const WordCounterPage(),
           ),
         ]),

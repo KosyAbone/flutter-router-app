@@ -61,12 +61,12 @@ class WelcomePage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ElevatedButton(
-                  onPressed: () => context.go('/newsfeed'),
+                  onPressed: () => context.go('/newsFeed'),
                   child: const Text('NewsFeed', style: TextStyle(fontSize: 18)),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () => context.go('/wordcounter'),
+                  onPressed: () => context.go('/wordCounter'),
                   child: const Text('Word Counter', style: TextStyle(fontSize: 18)),
                 ),
                 const SizedBox(height: 20),
