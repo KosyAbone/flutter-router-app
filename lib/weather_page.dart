@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
@@ -15,20 +14,20 @@ class _WeatherPageState extends State<WeatherPage> {
   final TextEditingController _cityController = TextEditingController();
   Map<String, dynamic> _weatherInfo = {};
 
+  // Function to fetch weather data based on the city name
   Future<void> _getWeather(String city) async {
-    // Replace 'YOUR_API_KEY' with the actual API key
     const apiKey = '10ec237e4e034eda983202746231610';
     final apiUrl = 'https://api.weatherapi.com/v1/current.json?key=$apiKey&q=$city';
 
-    final response = await http.get(Uri.parse(apiUrl));
+    final response = await http.get(Uri.parse(apiUrl)); // Make GET request to the API
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200) { // Check if the response is successful
       setState(() {
-        _weatherInfo = json.decode(response.body);
+        _weatherInfo = json.decode(response.body); // Update weatherInfo with the fetched data
       });
     } else {
       setState(() {
-        _weatherInfo = {'error': 'Failed to fetch weather data'};
+        _weatherInfo = {'error': 'Failed to fetch weather data'}; // Set error message
       });
     }
   }
@@ -44,12 +43,15 @@ class _WeatherPageState extends State<WeatherPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // Heading Text to instruct user
               const Text(
                 'Enter City and see its current weather details',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.purple),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 80),
+
+              // Text field to input city
               TextField(
                 controller: _cityController,
                 decoration: const InputDecoration(
@@ -58,6 +60,8 @@ class _WeatherPageState extends State<WeatherPage> {
                 ),
               ),
               const SizedBox(height: 20),
+
+              // Button to trigger weather data fetch
               ElevatedButton(
                 onPressed: () {
                   String city = _cityController.text;
@@ -66,12 +70,15 @@ class _WeatherPageState extends State<WeatherPage> {
                 child: const Text('Search'),
               ),
               const SizedBox(height: 20),
+
+              // Display weather information or error
               if (_weatherInfo.containsKey('error'))
                 Text(_weatherInfo['error'])
               else if (_weatherInfo.isNotEmpty)
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // Display location name and weather details
                     if (_weatherInfo.containsKey('location'))
                       Text(
                         _weatherInfo['location']['name'],
@@ -98,6 +105,8 @@ class _WeatherPageState extends State<WeatherPage> {
                   ],
                 ),
               const SizedBox(height: 20),
+
+              // Button to navigate back to home
               FloatingActionButton(
                 onPressed: () {
                   context.go('/');
