@@ -29,44 +29,56 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Flutter Assignment App')),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Center(
-              child: Image.asset(
-                'assets/images/welcome_image.jpeg',
-                height: MediaQuery.of(context).size.height *
-                    0.6, // Adjust image size
-                width: MediaQuery.of(context).size.width * 0.8,
-                fit: BoxFit.contain,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 50),
+            const Center(
+              child: Text(
+                'Welcome to Flutter Assignment App!',
+                style: TextStyle(fontSize: 21, fontWeight: FontWeight.bold),
               ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
+            const SizedBox(height: 20),
+            Expanded(
+              child: Center(
+                child: Image.asset(
+                  'assets/images/welcome_image.jpeg',
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            const Text(
+              'Explore the app features:',
+              style: TextStyle(fontSize: 19),
+            ),
+            const SizedBox(height: 50),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ElevatedButton(
                   onPressed: () => context.go('/newsfeed'),
-                  child: const Text('NewsFeed'),
+                  child: const Text('NewsFeed', style: TextStyle(fontSize: 18)),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () => context.go('/wordcounter'),
-                  child: const Text('Word Counter'),
+                  child: const Text('Word Counter', style: TextStyle(fontSize: 18)),
                 ),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () => context.go('/weather'),
-                  child: const Text('Weather'),
+                  child: const Text('Weather', style: TextStyle(fontSize: 18)),
                 ),
+                const SizedBox(height: 60),
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
